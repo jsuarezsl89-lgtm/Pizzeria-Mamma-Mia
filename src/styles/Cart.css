@@ -1,0 +1,173 @@
+.cartPizza {
+  width: 100%;
+  max-width: 700px;        
+  margin: 2rem auto;
+  padding: 2rem;           
+  background-color: #000;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.cart-header {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr; 
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 2px solid #444;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cart-header div:first-child {
+  text-align: left;
+}
+
+.cart-row {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr; 
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #333;
+}
+
+.cart-product {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+
+.cart-price,
+.cart-quantity {
+  text-align: center;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .cartPizza {
+    padding: 1rem;
+    max-width: 90%;
+  }
+
+  .cart-header {
+    display: none;
+  }
+
+  .cart-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .cart-price::before {
+    content: "Precio: ";
+    font-weight: bold;
+  }
+
+  .cart-quantity::before {
+    content: "Cantidad: ";
+    font-weight: bold;
+  }
+
+  .cart-price,
+  .cart-quantity {
+    text-align: left;
+  }
+}
+
+.cart-quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-quantity button {
+  background-color: #e63946;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.cart-quantity button:hover {
+  opacity: 0.8;
+}
+
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+/* Subtotal */
+.cart-subtotal {
+  text-align: center;
+}
+
+/* Desktop: agregamos la columna al grid */
+.cart-header {
+  grid-template-columns: 3fr 1fr 1fr 1fr; /* Producto | Precio | Cantidad | Subtotal */
+}
+
+.cart-row {
+  grid-template-columns: 3fr 1fr 1fr 1fr; /* Producto | Precio | Cantidad | Subtotal */
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #333;
+}
+
+/* Móvil: mostramos subtotal como etiqueta */
+@media (max-width: 600px) {
+  .cart-subtotal::before {
+    content: "Subtotal: ";
+    font-weight: bold;
+  }
+  .cart-subtotal {
+    text-align: left;
+  }
+
+  .cart-row {
+    grid-template-columns: 1fr; /* todo en vertical */
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+}
+
+.pay-btn {
+  background-color: green;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pay-btn:hover {
+  background-color: yellowgreen;
+  color: #000;
+}

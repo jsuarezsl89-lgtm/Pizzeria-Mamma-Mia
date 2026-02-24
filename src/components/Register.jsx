@@ -30,37 +30,39 @@ const Register = () => {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="E-mail"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <div className="input-password">
+    <div className="form-container">
+      <form className="form" onSubmit={handleSubmit}>
         <input
-          type={mostrarContraseña ? "text" : "password"}
-          placeholder="Contraseña"
-          onChange={(e) => setContraseña(e.target.value)}
+          type="email"
+          placeholder="E-mail"
+          onChange={(e) => setEmail(e.target.value)}
         />
-        <span onClick={() => setMostrarContraseña(!mostrarContraseña)}>
-          {mostrarContraseña ? <FaEye /> : <FaEyeSlash />}
-        </span>
-      </div>
+        <div className="input-password">
+          <input
+            type={mostrarContraseña ? "text" : "password"}
+            placeholder="Contraseña"
+            onChange={(e) => setContraseña(e.target.value)}
+          />
+          <span onClick={() => setMostrarContraseña(!mostrarContraseña)}>
+            {mostrarContraseña ? <FaEye /> : <FaEyeSlash />}
+          </span>
+        </div>
 
-      <div className="input-password">
-        <input
-          type={mostrarConfirmar ? "text" : "password"}
-          placeholder="Confirmar contraseña"
-          onChange={(e) => setConfirmarContraseña(e.target.value)}
-        />
-        <span onClick={() => setMostrarConfirmar(!mostrarConfirmar)}>
-          {mostrarConfirmar ? <FaEye /> : <FaEyeSlash />}
-        </span>
-      </div>
-      <button type="submit">Enviar</button>
-      <p className="mensaje">{mensaje}</p>
-      <p className="mensajeExito">{mensajeExito}</p>
-    </form>
+        <div className="input-password">
+          <input
+            type={mostrarConfirmar ? "text" : "password"}
+            placeholder="Confirmar contraseña"
+            onChange={(e) => setConfirmarContraseña(e.target.value)}
+          />
+          <span onClick={() => setMostrarConfirmar(!mostrarConfirmar)}>
+            {mostrarConfirmar ? <FaEye /> : <FaEyeSlash />}
+          </span>
+        </div>
+        <button type="submit">Enviar</button>
+        <p className="mensaje">{mensaje}</p>
+        <p className="mensajeExito">{mensajeExito}</p>
+      </form>
+    </div>
   );
 };
 

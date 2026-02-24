@@ -2,24 +2,21 @@ import "../styles/CardPizza.css"
 import { formatPrice } from "../utils/formatPrice";
 import { FaEye, FaShoppingCart } from "react-icons/fa";
 
-const CardPizza = ({ img, nombre, tamaño, ingredientes, precio }) => {
+const CardPizza = ({ img, nombre, ingredientes, precio, desc }) => {
   return (
     <article className="card-pizza">
       <img src={img} alt={nombre} className="card-pizza-img" />
       <h4>{nombre}</h4>
-      <p>
-        <b>Tamaño: </b>
-        {tamaño}
-      </p>
+      <p>{desc}</p>
       <hr />
       <p>
         <b>Ingredientes:</b>
       </p>
-      <div className="card-pizza-ingredientes">
-        {ingredientes.map((ingrediente) => (
-          <p>{ingrediente}</p>
+      <ul className="card-pizza-ingredientes">
+        {ingredientes.map((ingrediente, index) => (
+          <li key={index}>* {ingrediente}</li>
         ))}
-      </div>
+      </ul>
       <hr />
       <p className="precio">
         <b>Precio: </b>${formatPrice(precio)}
