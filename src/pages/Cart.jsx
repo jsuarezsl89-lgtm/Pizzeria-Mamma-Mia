@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { pizzaCart as initialCart } from "../pizzas";
-import CartPizza from "./CartPizza";
+import CartPizza from "../components/CartPizza";
 import { formatPrice } from "../utils/formatPrice";
 import "../styles/Cart.css";
 
