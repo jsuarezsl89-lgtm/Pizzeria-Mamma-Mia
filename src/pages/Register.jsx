@@ -1,6 +1,8 @@
 import "../styles/Register.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -10,8 +12,10 @@ const Register = () => {
   const [mostrarConfirmar, setMostrarConfirmar] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [mensajeExito, setMensajeExito] = useState("");
+  const { register } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (email === "" || contraseña === "" || confirmarContraseña === "") {
@@ -24,8 +28,15 @@ const Register = () => {
       setMensaje("Las contraseñas no coinciden");
       setMensajeExito("");
     } else {
-      setMensajeExito("¡Registro exitoso!");
-      setMensaje("");
+      const data = await register(email, contraseña);
+      if (data.token) {
+        setMensajeExito("¡Registro exitoso!");
+        setMensaje("");
+        navigate("/");
+      } else {
+        setMensaje("Error al registrar el usuario");
+        setMensajeExito("");
+      }
     }
   };
 
@@ -47,7 +58,6 @@ const Register = () => {
             {mostrarContraseña ? <FaEye /> : <FaEyeSlash />}
           </span>
         </div>
-
         <div className="input-password">
           <input
             type={mostrarConfirmar ? "text" : "password"}

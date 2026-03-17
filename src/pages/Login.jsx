@@ -1,6 +1,8 @@
 import "../styles/Login.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -8,8 +10,10 @@ const Login = () => {
   const [mostrarContraseña, setMostrarContraseña] = useState(false);
   const [mensajeError, setMensajeError] = useState("");
   const [mensajeExito, setMensajeExito] = useState("");
+  const { login } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (email === "" || contraseña === "") {
@@ -19,8 +23,15 @@ const Login = () => {
       setMensajeError("La contraseña debe tener al menos 6 caracteres");
       setMensajeExito("");
     } else {
-      setMensajeExito("¡Login correcto!");
-      setMensajeError("");
+      const data = await login(email, contraseña);
+      if (data.token) {
+        setMensajeExito("¡Login correcto!");
+        setMensajeError("");
+        navigate("/");
+      } else {
+        setMensajeError("Email o contraseña incorrectos");
+        setMensajeExito("");
+      }
     }
   };
 
