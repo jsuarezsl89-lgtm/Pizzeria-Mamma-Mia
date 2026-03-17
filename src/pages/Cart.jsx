@@ -1,33 +1,21 @@
-import { useState } from "react";
-import { pizzaCart as initialCart } from "../pizzas";
 import CartPizza from "../components/CartPizza";
 import { formatPrice } from "../utils/formatPrice";
 import "../styles/Cart.css";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Cart = () => {
-  const [cart, setCart] = useState(initialCart);
+  const { cart, addToCart, decreaseFromCart, getTotal } =
+    useContext(CartContext);
 
-  // Aumentar cantidad
   const increase = (id) => {
-    const updatedCart = cart.map((pizza) =>
-      pizza.id === id ? { ...pizza, count: pizza.count + 1 } : pizza,
-    );
-    setCart(updatedCart);
+    const pizza = cart.find((item) => item.id === id);
+    addToCart(pizza);
   };
 
-  // Disminuir cantidad
   const decrease = (id) => {
-    const updatedCart = cart
-      .map((pizza) =>
-        pizza.id === id ? { ...pizza, count: pizza.count - 1 } : pizza,
-      )
-      .filter((pizza) => pizza.count > 0); // elimina si llega a 0
-
-    setCart(updatedCart);
+    decreaseFromCart(id);
   };
-
-  // Calcular total
-  const total = cart.reduce((acc, pizza) => acc + pizza.price * pizza.count, 0);
 
   return (
     <div className="cartPizza">
@@ -48,7 +36,7 @@ const Cart = () => {
       ))}
 
       <div className="cart-footer">
-        <h2>Total: ${formatPrice(total)}</h2>
+        <h2>Total: ${formatPrice(getTotal())}</h2>
         <button className="pay-btn">Pagar</button>
       </div>
     </div>

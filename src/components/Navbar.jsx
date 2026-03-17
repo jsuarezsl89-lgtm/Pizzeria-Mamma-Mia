@@ -2,9 +2,11 @@ import "../styles/Navbar.css";
 import logo from "../assets/img/Mamma Mía.jpg";
 import { formatPrice } from "../utils/formatPrice";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Navbar = () => {
-  const total = 25000;
+  const { getTotal } = useContext(CartContext);
   const token = false;
 
   return (
@@ -35,7 +37,7 @@ const Navbar = () => {
 
         <Link to="/cart">
           <button className="btn btn-total">
-            🛒 Total: ${formatPrice(total)}
+            🛒 Total: ${formatPrice(getTotal())}
           </button>
         </Link>
       </nav>

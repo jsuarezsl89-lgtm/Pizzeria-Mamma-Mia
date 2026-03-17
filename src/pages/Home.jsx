@@ -1,15 +1,10 @@
-import { useState, useEffect } from "react";
-import Header from "../components/Header";      
-import CardPizza from "../components/CardPizza"; 
+import Header from "../components/Header";
+import CardPizza from "../components/CardPizza";
+import { useContext } from "react";
+import { PizzaContext } from "../context/PizzaContext";
 
 const Home = () => {
-  const [pizzas, setPizzas] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/pizzas")
-      .then((response) => response.json())
-      .then((data) => setPizzas(data));
-  }, []);
+  const { pizzas } = useContext(PizzaContext);
 
   return (
     <main>
@@ -18,6 +13,7 @@ const Home = () => {
         {pizzas.map((pizza) => (
           <CardPizza
             key={pizza.id}
+            id={pizza.id}
             nombre={pizza.name}
             precio={pizza.price}
             img={pizza.img}

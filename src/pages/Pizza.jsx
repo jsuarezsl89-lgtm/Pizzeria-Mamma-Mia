@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { PizzaContext } from "../context/PizzaContext";
+import { formatPrice } from "../utils/formatPrice";
 
 const Pizza = () => {
-  const [pizza, setPizza] = useState(null);
+  const { pizza, getPizza } = useContext(PizzaContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/pizzas/p001")
-      .then((response) => response.json())
-      .then((data) => setPizza(data));
+    getPizza("p001");
   }, []);
 
   if (!pizza) return <p>Cargando...</p>;
@@ -21,7 +21,7 @@ const Pizza = () => {
       />
       <p>{pizza.desc}</p>
       <p>
-        <strong>Precio:</strong> ${pizza.price}
+        <strong>Precio:</strong> ${formatPrice(pizza.price)}
       </p>
       <h4>Ingredientes:</h4>
       <ul>

@@ -1,8 +1,17 @@
-import "../styles/CardPizza.css"
+import "../styles/CardPizza.css";
 import { formatPrice } from "../utils/formatPrice";
 import { FaEye, FaShoppingCart } from "react-icons/fa";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
-const CardPizza = ({ img, nombre, ingredientes, precio, desc }) => {
+const CardPizza = ({ img, nombre, ingredientes, precio, desc, id }) => {
+  const { addToCart } = useContext(CartContext);
+
+  const handleAddToCart = () => {
+    addToCart({ id, name: nombre, price: precio, img });
+  };
+
   return (
     <article className="card-pizza">
       <img src={img} alt={nombre} className="card-pizza-img" />
@@ -22,11 +31,11 @@ const CardPizza = ({ img, nombre, ingredientes, precio, desc }) => {
         <b>Precio: </b>${formatPrice(precio)}
       </p>
       <div className="botones">
-        <a className="btn-vermas" href="#!">
+        <Link className="btn-vermas" to={`/pizza/${id}`}>
           Ver más
           <FaEye />
-        </a>
-        <a className="btn-añadir" href="#!">
+        </Link>
+        <a className="btn-añadir" onClick={handleAddToCart}>
           Añadir
           <FaShoppingCart />
         </a>
