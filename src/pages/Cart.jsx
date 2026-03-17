@@ -3,10 +3,12 @@ import { formatPrice } from "../utils/formatPrice";
 import "../styles/Cart.css";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
 
 const Cart = () => {
   const { cart, addToCart, decreaseFromCart, getTotal } =
     useContext(CartContext);
+  const { token } = useContext(UserContext);
 
   const increase = (id) => {
     const pizza = cart.find((item) => item.id === id);
@@ -37,7 +39,9 @@ const Cart = () => {
 
       <div className="cart-footer">
         <h2>Total: ${formatPrice(getTotal())}</h2>
-        <button className="pay-btn">Pagar</button>
+        <button className="pay-btn" disabled={!token}>
+          Pagar
+        </button>
       </div>
     </div>
   );

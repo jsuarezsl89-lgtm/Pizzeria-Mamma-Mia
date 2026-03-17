@@ -1,13 +1,16 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useContext } from "react";
 import { PizzaContext } from "../context/PizzaContext";
 import { formatPrice } from "../utils/formatPrice";
 
 const Pizza = () => {
+  const { id } = useParams();
   const { pizza, getPizza } = useContext(PizzaContext);
 
   useEffect(() => {
-    getPizza("p001");
-  }, []);
+    getPizza(id);
+  }, [id]);
 
   if (!pizza) return <p>Cargando...</p>;
 

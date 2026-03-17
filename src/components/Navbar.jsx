@@ -4,10 +4,11 @@ import { formatPrice } from "../utils/formatPrice";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
 
 const Navbar = () => {
   const { getTotal } = useContext(CartContext);
-  const token = false;
+  const { token, logout } = useContext(UserContext);
 
   return (
     <div className="div-header">
@@ -22,7 +23,9 @@ const Navbar = () => {
             <Link to="/profile">
               <button className="btn btn-primary">🔓 Profile</button>
             </Link>
-            <button className="btn btn-primary">🔒 Logout</button>
+            <button className="btn btn-primary" onClick={logout}>
+              🔒 Logout
+            </button>
           </>
         ) : (
           <>
